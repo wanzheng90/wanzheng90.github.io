@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="">
+  
+  <title>java</title>
+  <meta name="author" content="wanzheng90">
+   <meta name="description" content="总结java基础语句、语法及类库">
+  
+
+  <meta property="og:title" content="java">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="事无不可对人言">
+ <meta property="og:image" content="undefined">
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="事无不可对人言" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+</html>
+<body>
+  <a id="top"></a>
+  <div id='wx_pic' style='display:none;'><img src='/wx_share.png'/></div>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        java
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-06-14T14:59:47.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-06-14
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/java-基础类/">java,基础类</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>总结java基础语句、语法及类库<br><a id="more"></a></p>
+<h1 id="todo"><a href="#todo" class="headerlink" title="todo:"></a>todo:</h1><ul>
+<li style="list-style: none"><input type="checkbox"> xorshift是怎样的</li>
+</ul>
+<h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><p>Object是所有对象的父类<br>包含的方法如下：</p>
+<ul>
+<li>hashcode,返回对象的hash码<br>同一个对象的hashcode多次调用必须返回一致，否则在hashmap可能出现找不到的情况。<br>与equal方法关联，两个对象hashcode相等，equal不需要相等，equal相等，hashcode必须相等。<br>返回值可以通过java启动参数配置 -XX:hashCode=4，选择如下，默认5。默认并非地址的计算<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0、随机值</span><br><span class="line">1、内存地址 计算值</span><br><span class="line">2、硬编码1</span><br><span class="line">3、序列</span><br><span class="line">4、内存地址</span><br><span class="line">5、线程状态结合xorshift算法</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>xorshift一种随机算法</p>
+</blockquote>
+<ul>
+<li><p>equal,比较两个对象内容<br>与==异同，equal方法比较对象内存引用是否相等，equal比较两个对象内容是否一样。equal对象默认使用==比较<br>equals方法遵循如下规则：</p>
+<ul>
+<li>自反，x.equals(x)必为真</li>
+<li>对称，如果x.equals(y)为真,必然y.equals(x)为真</li>
+<li>传递，如果x.equals(y)为真,y.equal(z)为真,必然x.equals(z)为真</li>
+<li>一致，如果x.equals(y)为真，如果x、y没有修改，则x.equals(y)永为真</li>
+<li>x.equals(null)永远为假</li>
+</ul>
+</li>
+<li><p>wait,让当前线程进入等待，直到被notify、notifyAll方法唤醒。 线程会释放当前对象monitor<br>  为何等待方法在object对象上而不在thread对象上，是因为java的monitor是在对象上。<strong>注意：只有当前线程获取到对象monitor时才能调用此方法（即必须在synchronize中才能使用)，否则会抛出java.lang.IllegalMonitorStateException异常</strong></p>
+</li>
+<li><p>notify 唤醒第一个等待该对象锁的线程，让其等待获取monitor。<br>线程调用notify()之后，只有该线程完全从 synchronized代码里面执行完毕后，monitor才会被释放，被唤醒线程才可以真正得到执行权。<br><strong>注意：只有当前线程获取到对象monitor时才能调用此方法（即必须在synchronize中才能使用)，否则会抛出java.lang.IllegalMonitorStateException异常</strong></p>
+</li>
+<li><p>notifyAll 唤醒所有在对象锁上等待的线程，让其竞争monitor，被唤醒线程会一直等待获取monitor<br><strong>注意：只有当前线程获取到对象monitor时才能调用此方法（即必须在synchronize中才能使用)，否则会抛出java.lang.IllegalMonitorStateException异常</strong></p>
+</li>
+<li><p>getClass,获取对象元类型</p>
+</li>
+<li><p>toString,打印对象信息</p>
+</li>
+<li><p>finalize，垃圾回收是调用。最多只会调用一次</p>
+</li>
+</ul>
+<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><h1 id="System"><a href="#System" class="headerlink" title="System"></a>System</h1><ul>
+<li>gc,gc方法调用垃圾回收<br>垃圾回收是另外一个线程控制</li>
+</ul>
+<h1 id="collection"><a href="#collection" class="headerlink" title="collection"></a>collection</h1><h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1>
+
+  </article>
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        事无不可对人言
+    </div>
+    <div class="secondrow">
+        <a href="http://wanzheng90.me">
+        wanzheng90
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
