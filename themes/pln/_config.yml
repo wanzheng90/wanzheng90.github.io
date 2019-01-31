@@ -1,0 +1,20 @@
+menu:
+  主页: /
+  归档: /archives
+
+logo: WZ
+
+more:
+  Github: https://github.com/wanzheng90
+  知乎: https://www.zhihu.com/people/wanzheng90
+  关于我: /about
+
+about:
+  title: wanzheng90
+  link: http://wanzheng90.me
+
+disqus_shortname:
+
+excerpt_num: 120
+
+footer_info: 事无不可对人言
